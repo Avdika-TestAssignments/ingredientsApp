@@ -14,3 +14,5 @@ function QueryHistory({ onClick, queryHistory }) {
         </Box>
     );
 };
+
+export default QueryHistory;

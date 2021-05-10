@@ -15,3 +15,4 @@ Saving the number of daily requests can be achieved in 2 ways. The first is to c
 
 So, now after the query, the keyword and the server response are stored in a variable. After pressing the "submit" button, the application splits the request into individual words (if more than one ingredient is specified in the request) and checks if a request with a similar keyword has been sent. If there is a match, the result for the keyword is output from the variable and all new words are sent with the request to the server.
 
+basic security rules can be achieved by adding a check for unwanted data in the input

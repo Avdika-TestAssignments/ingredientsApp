@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Ingridient from "./components/Ingridient";
 import Mainform from "./components/mainform";
@@ -27,10 +27,12 @@ const apiKey = 'fced7d7b5e6440f3a7a173f5026615e3';
 
 function App() {
   const [query, setQuery] = useState("");
-  const [displayingQuery, setDisplayingQuery] = useState("");
-  const [queryHistory, setQueryHistory]= useState([]);
   const [ingridients, setIngridients] = useState([]);
   const [notifications, setNotifications] = useState("");
+  
+  // useEffect(() => {
+  //   setQueryHistory(JSON.parse(localStorage.getItem('queryHistory')) || []);
+  // }, [JSON.parse(localStorage.getItem('queryHistory'))]);
 
   const getUrl = () =>
     `https://api.spoonacular.com/food/ingredients/search?apiKey=${apiKey}&query=${query}&number=100&sort=calories&sortDirection=desc`;
@@ -44,7 +46,8 @@ function App() {
         .then(data => {
           console.log('__ data : ', data);
           if (data?.results?.length) {
-            setQueryHistory([...queryHistory, { query, responce: data.results }]);
+            const queryHistory = JSON.parse(localStorage.getItem('queryHistory')) || [];
+            localStorage.setItem('queryHistory', JSON.stringify([...queryHistory, { query, responce: data.results }]));
             resultsProcess(data.results);
           } else {
             setNotifications("Empty response");
@@ -59,17 +62,14 @@ function App() {
   };
 
   const resultsProcess = results => {
-    setDisplayingQuery(query);
     setQuery("");
     setNotifications("");
-
     setIngridients(results);
   };
 
   const onHistoryClick = element => {
     console.log('__ onHistoryClick : ', element);
     resultsProcess(element.responce);
-    setDisplayingQuery(element.query);
   }
 
   const onChange = e => {
@@ -83,7 +83,7 @@ function App() {
     console.log('__ query : ', query);
 
     const queryArray = queryToArray(query);
-
+    const queryHistory = JSON.parse(localStorage.getItem('queryHistory')) || [];
     const isNewRequest = !queryHistory.some(historyElement => {
       const { query: element, responce } = historyElement;
       const elementArray = queryToArray(element);
@@ -115,7 +115,8 @@ function App() {
       getData();
     }
   };
-
+  
+  const queryHistory = JSON.parse(localStorage.getItem('queryHistory')) || [];
   return (
     <ChakraProvider>
     <div className="App">

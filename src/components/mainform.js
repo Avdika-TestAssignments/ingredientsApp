@@ -19,10 +19,10 @@ const mainform = ({ notifications, onChange, onSubmit, query }) => {
                 autoComplete="off"
                 placeholder="Search Ingridients"
             />
-            <IconButton 
+            <IconButton
                 colorScheme="blue"
                 aria-label="Search database"
-                type="submit" 
+                type="submit"
                 value="Search"
                 icon={<SearchIcon />}
                 />

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import "./App.css";
-import Ingredient from "./components/Ingredient";
-import Mainform from "./components/mainform";
-import QueryHistory from "./components/QueryHistory";
-import apiKey from "./config";
+import React, { useState } from 'react';
+import './App.css';
+import Ingredient from './components/Ingredient';
+import Mainform from './components/mainform';
+import QueryHistory from './components/QueryHistory';
+import { apiKey } from './config';
 
+console.log('test -'+apiKey);
 function App() {
   const [query, setQuery] = useState("");
   const [ingredients, setIngredients] = useState([]);
@@ -91,6 +92,7 @@ function App() {
   };
 
   const queryHistory = JSON.parse(localStorage.getItem('queryHistory')) || [];
+
   return (
     <div className="App">
       <h1>Ingredients Searching App</h1>
@@ -98,7 +100,7 @@ function App() {
       <QueryHistory queryHistory={queryHistory} onClick={onHistoryClick} />
       <div className="ingredients">
         {ingredients !== [] &&
-          ingredients.map(ingridient => <Ingredient ingridient={ingridient} />)}
+          ingredients.map(ingredient => <Ingredient ingredient={ingredient} />)}
       </div>
     </div>
   );

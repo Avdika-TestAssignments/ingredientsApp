@@ -19,7 +19,6 @@ function App() {
       fetch(getUrl())
         .then(response => response.json())
         .then(data => {
-          console.log('__ data : ', data);
           if (data?.results?.length) {
             const queryHistory = JSON.parse(localStorage.getItem('queryHistory')) || [];
             localStorage.setItem('queryHistory', JSON.stringify([...queryHistory, { query, responce: data.results }]));
@@ -43,7 +42,6 @@ function App() {
   };
 
   const onHistoryClick = element => {
-    console.log('__ onHistoryClick : ', element);
     resultsProcess(element.responce);
   };
 
@@ -55,7 +53,6 @@ function App() {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log('__ query : ', query);
 
     const queryArray = queryToArray(query);
     const queryHistory = JSON.parse(localStorage.getItem('queryHistory')) || [];

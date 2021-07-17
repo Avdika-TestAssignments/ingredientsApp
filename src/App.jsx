@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './App.css';
-import Ingredient from './components/Ingredient';
-import Mainform from './components/mainform';
-import QueryHistory from './components/QueryHistory';
-import { apiKey } from './config';
 
-console.log('test -'+apiKey);
+import { apiKey } from './config';
+import Results from './Components/Results';
+import Mainform from './Components/Mainform';
+import QueryHistory from './Components/QueryHistory';
+import './App.css';
+
 function App() {
   const [query, setQuery] = useState("");
   const [ingredients, setIngredients] = useState([]);
@@ -84,7 +84,7 @@ function App() {
       resultsProcess(responce);
 
       return true;
-    })
+    });
 
     if (isNewRequest) {
       getData();
@@ -98,10 +98,7 @@ function App() {
       <h1>Ingredients Searching App</h1>
       <Mainform notifications={notifications} onChange={onChange} onSubmit={onSubmit} query={query} />
       <QueryHistory queryHistory={queryHistory} onClick={onHistoryClick} />
-      <div className="ingredients">
-        {ingredients !== [] &&
-          ingredients.map(ingredient => <Ingredient ingredient={ingredient} />)}
-      </div>
+      <Results ingredients={ingredients} />
     </div>
   );
 };

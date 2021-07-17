@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Text } from '../Styled/NotificationsStyle';
+
 function Notifications({ notifications }) {
     return (
-        <div className="notifications">
-        <h3>{notifications}</h3>
+        <div>
+        <Text>{notifications}</Text>
       </div>
     )
 }

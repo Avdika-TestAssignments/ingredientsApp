@@ -1,11 +1,13 @@
 import React from 'react';
-import Notifications from './Notifications';
 
-const mainform = ({ notifications, onChange, onSubmit, query }) => {
+import Notifications from './Notifications';
+import { Input, InputS } from '../Styled/MainFormStyle';
+
+const Mainform = ({ notifications, onChange, onSubmit, query }) => {
     return (
         <form onSubmit={onSubmit} className="search-form">
             {notifications !== "" && <Notifications notifications={notifications} />}
-            <input
+            <Input
                 type="text"
                 name="query"
                 onChange={onChange}
@@ -14,7 +16,7 @@ const mainform = ({ notifications, onChange, onSubmit, query }) => {
                 placeholder="Search Ingredients"
                 spellcheck="true"
             />
-            <input
+            <InputS
                 type="submit"
                 value="Search"
             />
@@ -22,4 +24,4 @@ const mainform = ({ notifications, onChange, onSubmit, query }) => {
     );
 };
 
-export default mainform;
+export default Mainform;
